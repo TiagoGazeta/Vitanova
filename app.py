@@ -32,7 +32,7 @@ st.markdown("""
 
     /* 4. BALÕES DE MENSAGEM (ESTILO DOSSIÊ) */
     [data-testid="stChatMessage"] {
-        background-color: #161B22 !important; /* Cinza Chumbo Sólido */
+        background-color: #DCDCDC !important; /* Cinza */
         border: 1px solid #30363d !important;
         border-radius: 10px !important;
         margin-bottom: 15px !important;
