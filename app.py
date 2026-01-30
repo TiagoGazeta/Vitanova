@@ -39,13 +39,23 @@ st.markdown("""
         box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
     }
 
-    /* Ajuste no campo de digitação */
-    .stChatInput textarea {
-        color: #FFFFFF !important;
-        font-size: 1.2rem !important;
+    /* Ajuste no campo de digitação (Input) para visibilidade total */
+    div[data-testid="stChatInput"] {
+        background-color: #05070a !important; /* Fundo da barra inferior */
     }
-    </style>
-    """, unsafe_allow_html=True)
+
+    div[data-testid="stChatInput"] textarea {
+        background-color: #1a1c23 !important; /* Fundo da caixa de texto */
+        color: #FFFFFF !important;            /* Cor do texto digitado */
+        -webkit-text-fill-color: #FFFFFF !important; /* Força a cor no Chrome/Chromebooks */
+        border: 1px solid #30363d !important;
+        border-radius: 10px !important;
+    }
+    
+    /* Garante que o texto de sugestão (placeholder) não suma */
+    div[data-testid="stChatInput"] textarea::placeholder {
+        color: #888888 !important;
+    }
 
 # --- BASE DE CONHECIMENTO (Cole aqui o texto dos seus 5 arquivos) ---
 CONHECIMENTO_VITANOVA = """
