@@ -26,7 +26,7 @@ st.markdown("""
         color: #000080 !important; /* Azul */
         text-transform: uppercase;
         letter-spacing: 2px;
-        border-bottom: 2px solid #FFFFFF;
+        border-bottom: 2px solid #000000;
         padding-bottom: 10px;
     }
 
