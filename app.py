@@ -12,13 +12,13 @@ st.markdown("""
         font-family: 'Lexend', sans-serif;
     }
 
-    /* 2. TEXTO DAS MENSAGENS (O FIM DO CINZA) */
+    /* 2. TEXTO DAS MENSAGENS */
     .stMarkdown p, .stMarkdown li {
         color: #00000 !important;  /* Preto */
         font-size: 1.2rem !important;
         line-height: 1.6 !important;
         font-weight: 400 !important;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Melhora a nitidez */
+        text-shadow: 1px 1px 1px rgba(0,0,0,0.5); /* Melhora a nitidez */
     }
 
     /* 3. TÍTULOS VIBRANTES */
