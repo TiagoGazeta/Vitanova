@@ -8,13 +8,13 @@ st.markdown("""
 
     /* 1. FUNDO E FONTE GLOBAL */
     .stApp {
-        background-color: #0B0E14; /* Preto Profundo */
+        background-color: #FFFFF; /* Branco */
         font-family: 'Lexend', sans-serif;
     }
 
     /* 2. TEXTO DAS MENSAGENS (O FIM DO CINZA) */
     .stMarkdown p, .stMarkdown li {
-        color: #FFFFFF !important;  /* Branco Absoluto */
+        color: #00000 !important;  /* Preto */
         font-size: 1.2rem !important;
         line-height: 1.6 !important;
         font-weight: 400 !important;
@@ -4049,7 +4049,7 @@ model = genai.GenerativeModel(
 
 # 2. Título do App
 st.title("🕵️‍♂️ Terminal da Ordem de Vitanova")
-st.caption("Conexão Criptografada | Ambiente Seguro do 5ºano")
+st.caption("Conexão Criptografada | Ambiente Seguro do 5º ano")
 
 # 3. Inicialização da Memória (O que estava dando erro)
 if "messages" not in st.session_state:
