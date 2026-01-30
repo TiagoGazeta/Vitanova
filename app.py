@@ -4070,20 +4070,22 @@ if prompt := st.chat_input("Relate sua descoberta ou dúvida..."):
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
-        # Prepara o histórico para o Groq
-        mensagens_chat = [
-            {"role": "system", "content": "Você é o Mestre Investigador de Vitanova. Nunca dê respostas prontas."},
-            *st.session_state.messages
-        ]
-        
-        # Chama o novo mestre
-        completion = client.chat.completions.create(
-            model=MODELO_GROQ,
-            messages=mensagens_chat,
-        )
-        
-        resposta = completion.choices[0].message.content
-        st.markdown(resposta)
-        st.session_state.messages.append({"role": "assistant", "content": resposta})
-        except Exception as e:
+        try: # <--- O "TRAPÉZIO" COMEÇA AQUI
+            # Prepara o histórico para o Groq
+            mensagens_chat = [
+                {"role": "system", "content": "Você é o Mestre Investigador de Vitanova. Nunca dê respostas prontas."},
+                *st.session_state.messages
+            ]
+            
+            # Chama o novo mestre
+            completion = client.chat.completions.create(
+                model=MODELO_GROQ,
+                messages=mensagens_chat,
+            )
+            
+            resposta = completion.choices[0].message.content
+            st.markdown(resposta)
+            st.session_state.messages.append({"role": "assistant", "content": resposta})
+
+        except Exception as e: # <--- A "REDE DE PROTEÇÃO" ALINHADA COM O TRY
             st.error(f"Erro na comunicação: {e}")
