@@ -3974,40 +3974,29 @@ else:
     st.error("Erro: API Key não encontrada nos Secrets do Streamlit.")
 
 model = genai.GenerativeModel(
-    model_name="gemini-1.5-flash",
+    model_name="gemini-3-flash-preview",
     system_instruction=INSTRUCOES_MESTRE
 )
-
-# Interface de Chat
-st.title("🕵️‍♂️ Terminal da Ordem: Vitanova")
-st.caption("Mestre Investigador conectado | Setor 5ºD")
-
-if "messages" not in st.session_state:
-    st.session_state.messages = []
-
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
 
 if prompt := st.chat_input("Relate sua descoberta ou dúvida..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
-   # Resposta da IA
     with st.chat_message("assistant"):
-        # Traduzindo o histórico para o formato que o Google entende
+        # Ajuste técnico: O Google exige 'model' em vez de 'assistant' no histórico
         history_google = []
         for m in st.session_state.messages[:-1]:
-            # Se for assistente, vira 'model'. Se não, continua 'user'.
             role_google = "model" if m["role"] == "assistant" else "user"
             history_google.append({"role": role_google, "parts": [m["content"]]})
         
         chat = model.start_chat(history=history_google)
         
         try:
+            # Envia a mensagem e exibe a resposta
             response = chat.send_message(prompt)
             st.markdown(response.text)
             st.session_state.messages.append({"role": "assistant", "content": response.text})
         except Exception as e:
-            st.error(f"Erro na comunicação: {e}")
+            st.error(f"Erro na conexão com Vitanova: {str(e)}")
+            st.info("Dica: Verifique se o nome do modelo no código é o mesmo do AI Studio.")
