@@ -4048,8 +4048,8 @@ model = genai.GenerativeModel(
 )
 
 # 2. Título do App
-st.title("🕵️‍♂️ Terminal da Ordem: Vitanova")
-st.caption("Conexão Criptografada | Setor 5ºD")
+st.title("🕵️‍♂️ Terminal da Ordem de Vitanova")
+st.caption("Conexão Criptografada | Ambiente Seguro do 5ºano")
 
 # 3. Inicialização da Memória (O que estava dando erro)
 if "messages" not in st.session_state:
