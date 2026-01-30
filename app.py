@@ -23,7 +23,7 @@ st.markdown("""
 
     /* 3. TÍTULOS VIBRANTES */
     h1, h2, h3 {
-        color: #FFD700 !important; /* Amarelo Ouro da Ordem */
+        color: ##4169E1 !important; /* Azul */
         text-transform: uppercase;
         letter-spacing: 2px;
         border-bottom: 2px solid #FFD700;
