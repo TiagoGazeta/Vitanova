@@ -39,25 +39,36 @@ st.markdown("""
         color: #FFFFFF !important;
     }
 
-    /* 5. CONSERTO FINAL DO CAMPO DE DIGITAÇÃO */
+/* 5. CONSERTO ESTÉTICO: INPUT "CLEAN" E MODERNO */
     div[data-testid="stChatInput"] {
-        background-color: #0B0E14 !important;
+        background-color: transparent !important;
+        padding-bottom: 1.5rem !important;
     }
 
     div[data-testid="stChatInput"] textarea {
-        background-color: #1C2128 !important; /* Fundo do campo onde digita */
-        color: #FFFFFF !important;            /* Letra branca ao digitar */
+        background-color: #262730 !important; /* Cinza suave que combina com o fundo */
+        color: #FFFFFF !important;
         -webkit-text-fill-color: #FFFFFF !important;
-        font-size: 1.1rem !important;
-        border: 2px solid #FFD700 !important; /* Borda dourada no foco */
+        border: 1px solid #4b4d52 !important; /* Borda fina e discreta */
+        border-radius: 25px !important;       /* Formato arredondado 'clean' */
+        padding: 12px 20px !important;        /* Mais espaço para o texto respirar */
+        font-size: 1rem !important;
+        line-height: 1.4 !important;
     }
 
-    /* Ajuste para o botão de enviar */
-    button[data-testid="stChatInputSubmit"] {
-        color: #FFD700 !important;
+    /* Muda a cor da borda suavemente quando você clica para digitar */
+    div[data-testid="stChatInput"] textarea:focus {
+        border: 1px solid #FFD700 !important; 
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.1) !important;
+        outline: none !important;
     }
-    </style>
-    """, unsafe_allow_html=True)
+
+    /* Estiliza o botão de enviar (a setinha) */
+    button[data-testid="stChatInputSubmit"] {
+        background-color: transparent !important;
+        color: #FFD700 !important;
+        right: 10px !important;
+    }
 
 # --- 2. BASE DE CONHECIMENTO ---
 # IMPORTANTE: As três aspas abaixo abrem o texto. Não as apague!
