@@ -4,9 +4,45 @@ import google.generativeai as genai
 # Configuração Visual
 st.set_page_config(page_title="Ordem dos Investigadores: Vitanova", page_icon="🕵️‍♂️")
 
+# --- ESTILO VISUAL DA ORDEM ---
 st.markdown("""
     <style>
-    .stApp { background-color: #0e1117; color: #e0e0e0; }
+    /* Importa uma fonte mais moderna e legível */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+    .stApp {
+        background-color: #0e1117;
+        color: #f0f2f6;
+        font-family: 'Inter', sans-serif;
+    }
+
+    /* Aumenta o tamanho da letra das mensagens */
+    .stMarkdown p {
+        font-size: 1.15rem !important;
+        line-height: 1.6 !important;
+        margin-bottom: 1rem;
+    }
+
+    /* Estiliza os títulos para dar um ar de "Dossiê Profissional" */
+    h1 {
+        color: #FFD700 !important; /* Dourado da Ordem */
+        font-size: 2.5rem !important;
+        font-weight: 700 !important;
+        text-shadow: 2px 2px 4px #000000;
+    }
+
+    /* Melhora a visibilidade do campo de digitação */
+    .stChatInput textarea {
+        font-size: 1.1rem !important;
+    }
+    
+    /* Deixa o texto do assistente com um fundo levemente diferente para destacar */
+    [data-testid="stChatMessage"] {
+        border-radius: 15px;
+        padding: 15px;
+        margin-bottom: 10px;
+        border: 1px solid #30363d;
+    }
     </style>
     """, unsafe_allow_html=True)
 
