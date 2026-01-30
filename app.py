@@ -1,5 +1,5 @@
 import streamlit as st
-import google.generativeai as genai
+from groq import Groq
 
 # --- ESTILO VISUAL: PROTOCOLO DE ELITE ---
 st.markdown("""
@@ -4043,12 +4043,12 @@ INSTRUCOES_MESTRE = f"""
 
 # 1. Configuração do Modelo (Ajustado para o nome oficial)
 model = genai.GenerativeModel(
-    model_name="gemini-2.5-flash-lite", 
+    model_name="llama-3.3-70b-versatile", 
     system_instruction=INSTRUCOES_MESTRE
 )
 
 # --- CONFIGURAÇÃO DA API ---
-genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
+client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 
 # 2. Título do App
 st.title("🕵️‍♂️ Terminal da Ordem de Vitanova")
@@ -4064,23 +4064,26 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 # 5. Entrada de texto e resposta da IA
-if prompt := st.chat_input(" Relate sua descoberta ou dúvida, investigador (a), clicando aqui..."):
+if prompt := st.chat_input("Relate sua descoberta ou dúvida..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
-        # Tradução de roles para o Google
-        history_google = []
-        for m in st.session_state.messages[:-1]:
-            role_google = "model" if m["role"] == "assistant" else "user"
-            history_google.append({"role": role_google, "parts": [m["content"]]})
+        # Prepara o histórico para o Groq
+        mensagens_chat = [
+            {"role": "system", "content": "Você é o Mestre Investigador de Vitanova. Nunca dê respostas prontas."},
+            *st.session_state.messages
+        ]
         
-        chat = model.start_chat(history=history_google)
+        # Chama o novo mestre
+        completion = client.chat.completions.create(
+            model=MODELO_GROQ,
+            messages=mensagens_chat,
+        )
         
-        try:
-            response = chat.send_message(prompt)
-            st.markdown(response.text)
-            st.session_state.messages.append({"role": "assistant", "content": response.text})
+        resposta = completion.choices[0].message.content
+        st.markdown(resposta)
+        st.session_state.messages.append({"role": "assistant", "content": resposta})
         except Exception as e:
             st.error(f"Erro na comunicação: {e}")
