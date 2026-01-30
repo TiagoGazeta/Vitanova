@@ -23,7 +23,7 @@ st.markdown("""
 
     /* 3. TÍTULOS VIBRANTES */
     h1, h2, h3 {
-        color: ##4169E1 !important; /* Azul */
+        color: #000080 !important; /* Azul */
         text-transform: uppercase;
         letter-spacing: 2px;
         border-bottom: 2px solid #FFD700;
