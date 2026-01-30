@@ -1,42 +1,60 @@
 import streamlit as st
 import google.generativeai as genai
 
-# --- 1. CONFIGURAÇÃO VISUAL DA ORDEM (ALTO CONTRASTE) ---
+# --- ESTILO VISUAL: PROTOCOLO DE ELITE ---
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap');
 
-    /* Fundo escuro e fonte legível */
+    /* 1. FUNDO E FONTE GLOBAL */
     .stApp {
-        background-color: #05070a;
+        background-color: #0B0E14; /* Preto Profundo */
         font-family: 'Lexend', sans-serif;
     }
 
-    /* COR DA LETRA: Branco Puro para as mensagens */
+    /* 2. TEXTO DAS MENSAGENS (O FIM DO CINZA) */
     .stMarkdown p, .stMarkdown li {
-        color: #FFFFFF !important; 
-        font-size: 1.25rem !important;
-        font-weight: 500 !important;
-        line-height: 1.7 !important;
-    }
-
-    /* Títulos em Amarelo Vibrante */
-    h1, h2, h3 {
-        color: #FFEB3B !important; 
-        font-weight: 700 !important;
-    }
-
-    /* CONSERTO DO CAMPO DE DIGITAÇÃO: Fundo escuro e letra branca */
-    div[data-testid="stChatInput"] textarea {
-        background-color: #1a1c23 !important;
-        color: #FFFFFF !important;
-        -webkit-text-fill-color: #FFFFFF !important;
+        color: #FFFFFF !important;  /* Branco Absoluto */
         font-size: 1.2rem !important;
+        line-height: 1.6 !important;
+        font-weight: 400 !important;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Melhora a nitidez */
     }
 
-    /* Texto de sugestão visível */
-    div[data-testid="stChatInput"] textarea::placeholder {
-        color: #888888 !important;
+    /* 3. TÍTULOS VIBRANTES */
+    h1, h2, h3 {
+        color: #FFD700 !important; /* Amarelo Ouro da Ordem */
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border-bottom: 2px solid #FFD700;
+        padding-bottom: 10px;
+    }
+
+    /* 4. BALÕES DE MENSAGEM (ESTILO DOSSIÊ) */
+    [data-testid="stChatMessage"] {
+        background-color: #161B22 !important; /* Cinza Chumbo Sólido */
+        border: 1px solid #30363d !important;
+        border-radius: 10px !important;
+        margin-bottom: 15px !important;
+        color: #FFFFFF !important;
+    }
+
+    /* 5. CONSERTO FINAL DO CAMPO DE DIGITAÇÃO */
+    div[data-testid="stChatInput"] {
+        background-color: #0B0E14 !important;
+    }
+
+    div[data-testid="stChatInput"] textarea {
+        background-color: #1C2128 !important; /* Fundo do campo onde digita */
+        color: #FFFFFF !important;            /* Letra branca ao digitar */
+        -webkit-text-fill-color: #FFFFFF !important;
+        font-size: 1.1rem !important;
+        border: 2px solid #FFD700 !important; /* Borda dourada no foco */
+    }
+
+    /* Ajuste para o botão de enviar */
+    button[data-testid="stChatInputSubmit"] {
+        color: #FFD700 !important;
     }
     </style>
     """, unsafe_allow_html=True)
