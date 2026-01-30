@@ -59,7 +59,7 @@ st.markdown("""
 
 # --- BASE DE CONHECIMENTO (Cole aqui o texto dos seus 5 arquivos) ---
 CONHECIMENTO_VITANOVA = """
-🕵️♂️ GUIA DE HABILIDADES DO INVESTIGADOR (MISSÃO 1)
+♂️ GUIA DE HABILIDADES DO INVESTIGADOR (MISSÃO 1)
 Nesta primeira semana, para entender o que está acontecendo em Vitanova, vamos desenvolver as seguintes competências:
 📜 HISTÓRIA
 •	(EF05HI01A): Identificar os processos de formação das culturas e dos povos, relacionando-os com o espaço geográfico ocupado.
