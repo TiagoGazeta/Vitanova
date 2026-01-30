@@ -39,44 +39,45 @@ st.markdown("""
         color: #FFFFFF !important;
     }
 
-/* --- REMOVE O CONTORNO VERMELHO E ESTILIZA O INPUT --- */
+/* --- EXTERMÍNIO TOTAL DA BORDA VERMELHA --- */
     
-    /* 1. Remove sombras e bordas coloridas do container externo */
+    /* 1. Alvo: O contêiner geral do input */
     div[data-testid="stChatInput"] {
         border: none !important;
         box-shadow: none !important;
-        background-color: transparent !important;
     }
 
-    /* 2. Estiliza a caixa de texto propriamente dita */
-    div[data-testid="stChatInput"] textarea {
+    /* 2. Alvo: A moldura interna (onde o Streamlit esconde o vermelho) */
+    div[data-testid="stChatInput"] > div {
+        border: 1px solid #30363d !important; /* Borda discreta padrão */
+        box-shadow: none !important;
         background-color: #1a1c23 !important;
+        border-radius: 20px !important;
+    }
+
+    /* 3. Alvo: O estado de clique (focus-within) - AQUI MORRE O VERMELHO */
+    div[data-testid="stChatInput"] > div:focus-within {
+        border-color: #4b4d52 !important; /* Muda para um cinza leve ao clicar */
+        box-shadow: none !important;      /* Mata o brilho vermelho */
+    }
+
+    /* 4. Alvo: A área de texto e o cursor */
+    div[data-testid="stChatInput"] textarea {
         color: #FFFFFF !important;
         -webkit-text-fill-color: #FFFFFF !important;
-        
-        /* FAZ O CURSOR PISCAR EM BRANCO */
-        caret-color: #FFFFFF !important; 
-        
-        border: 1px solid #30363d !important;
-        border-radius: 20px !important;
-        padding: 12px 20px !important;
-
-        /* MATA O VERMELHO NO CLIQUE */
-        outline: none !important;
+        caret-color: #FFFFFF !important; /* O guia que pisca */
+        background-color: transparent !important;
+        border: none !important;
         box-shadow: none !important;
-    }
-
-    /* 3. Define um brilho branco sutil ao clicar (substituindo o vermelho) */
-    div[data-testid="stChatInput"] textarea:focus {
         outline: none !important;
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1) !important;
-        border: 1px solid #4b4d52 !important;
     }
 
-    /* Garante que o botão de enviar não tenha contornos estranhos */
+    /* 5. Alvo: O botão de enviar (setinha) */
     button[data-testid="stChatInputSubmit"] {
+        background-color: transparent !important;
+        color: #FFFFFF !important;
+        border: none !important;
         box-shadow: none !important;
-        outline: none !important;
     }
     </style>
     """, unsafe_allow_html=True) #
