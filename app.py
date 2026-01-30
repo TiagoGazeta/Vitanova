@@ -4047,6 +4047,19 @@ model = genai.GenerativeModel(
     system_instruction=INSTRUCOES_MESTRE
 )
 
+# --- CONFIGURAÇÃO DA API ---
+genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
+
+# --- CÓDIGO DE DIAGNÓSTICO (COLE AQUI) ---
+st.subheader("🕵️‍♂️ Diagnóstico da Ordem: Modelos Disponíveis")
+modelos_vivos = []
+for m in genai.list_models():
+    if 'generateContent' in m.supported_generation_methods:
+        modelos_vivos.append(m.name)
+
+st.write(modelos_vivos) # Isso vai mostrar a lista na tela do seu site!
+# -----------------------------------------
+
 # 2. Título do App
 st.title("🕵️‍♂️ Terminal da Ordem de Vitanova")
 st.caption("Conexão Criptografada | Ambiente Seguro do 5º ano")
