@@ -64,8 +64,8 @@ st.markdown("""
     /* 4. A LETRA: Força Branco Puro e faz o Cursor aparecer */
     div[data-testid="stChatInput"] textarea {
         color: #FFFFFF !important;              /* Letra Branca */
-        -webkit-text-fill-color: #FFFFFF !important; /* Garante o Branco no Chrome */
-        caret-color: #FFFFFF !important;        /* CURSOR PISCANDO EM BRANCO */
+        -webkit-text-fill-color: #000000 !important; /* Garante o Preto no Chrome */
+        caret-color: #000000 !important;        /* CURSOR PISCANDO EM BRANCO */
         background-color: transparent !important;
         border: none !important;
         box-shadow: none !important;
