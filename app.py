@@ -1,63 +1,48 @@
 import streamlit as st
 import google.generativeai as genai
 
-# Configuração Visual
-st.set_page_config(page_title="Ordem dos Investigadores: Vitanova", page_icon="🕵️‍♂️")
-
-# --- ESTILO VISUAL DE ALTO CONTRASTE ---
+# --- 1. CONFIGURAÇÃO VISUAL DA ORDEM (ALTO CONTRASTE) ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&display=swap');
 
-    /* Fundo bem escuro para o texto brilhar */
+    /* Fundo escuro e fonte legível */
     .stApp {
         background-color: #05070a;
         font-family: 'Lexend', sans-serif;
     }
 
-    /* COR DA LETRA: Branco Puro e com mais "corpo" */
+    /* COR DA LETRA: Branco Puro para as mensagens */
     .stMarkdown p, .stMarkdown li {
         color: #FFFFFF !important; 
-        font-size: 1.25rem !important; /* Letra maior para o 5ºD */
-        font-weight: 500 !important;   /* Letra levemente mais grossa */
-        line-height: 1.7 !important;   /* Mais espaço entre linhas */
-        letter-spacing: 0.02rem;       /* Espaçamento entre letras */
+        font-size: 1.25rem !important;
+        font-weight: 500 !important;
+        line-height: 1.7 !important;
     }
 
-    /* Títulos em Amarelo Vibrante (mais visível que o dourado) */
+    /* Títulos em Amarelo Vibrante */
     h1, h2, h3 {
         color: #FFEB3B !important; 
         font-weight: 700 !important;
-        text-transform: uppercase;
-        letter-spacing: 0.1rem;
     }
 
-    /* Estilização das caixas de mensagem para não ficarem apagadas */
-    [data-testid="stChatMessage"] {
-        background-color: #1a1c23 !important; /* Cinza escuro sólido */
-        border: 2px solid #30363d !important;
-        box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
-    }
-
-    /* Ajuste no campo de digitação (Input) para visibilidade total */
-    div[data-testid="stChatInput"] {
-        background-color: #05070a !important; /* Fundo da barra inferior */
-    }
-
+    /* CONSERTO DO CAMPO DE DIGITAÇÃO: Fundo escuro e letra branca */
     div[data-testid="stChatInput"] textarea {
-        background-color: #1a1c23 !important; /* Fundo da caixa de texto */
-        color: #FFFFFF !important;            /* Cor do texto digitado */
-        -webkit-text-fill-color: #FFFFFF !important; /* Força a cor no Chrome/Chromebooks */
-        border: 1px solid #30363d !important;
-        border-radius: 10px !important;
+        background-color: #1a1c23 !important;
+        color: #FFFFFF !important;
+        -webkit-text-fill-color: #FFFFFF !important;
+        font-size: 1.2rem !important;
     }
-    
-    /* Garante que o texto de sugestão (placeholder) não suma */
+
+    /* Texto de sugestão visível */
     div[data-testid="stChatInput"] textarea::placeholder {
         color: #888888 !important;
     }
+    </style>
+    """, unsafe_allow_html=True)
 
-# --- BASE DE CONHECIMENTO (Cole aqui o texto dos seus 5 arquivos) ---
+# --- 2. BASE DE CONHECIMENTO ---
+# IMPORTANTE: As três aspas abaixo abrem o texto. Não as apague!
 CONHECIMENTO_VITANOVA = """
 🕵️♂️ GUIA DE HABILIDADES DO INVESTIGADOR (MISSÃO 1)
 Nesta primeira semana, para entender o que está acontecendo em Vitanova, vamos desenvolver as seguintes competências:
