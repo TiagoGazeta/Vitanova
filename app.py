@@ -39,36 +39,40 @@ st.markdown("""
         color: #FFFFFF !important;
     }
 
-/* 5. CONSERTO ESTÉTICO: INPUT "CLEAN" E MODERNO */
+/* --- BARRA DE DIGITAÇÃO ULTRA CLEAN --- */
     div[data-testid="stChatInput"] {
         background-color: transparent !important;
-        padding-bottom: 1.5rem !important;
     }
 
     div[data-testid="stChatInput"] textarea {
-        background-color: #262730 !important; /* Cinza suave que combina com o fundo */
-        color: #FFFFFF !important;
+        background-color: #1a1c23 !important; /* Fundo escuro elegante */
+        color: #FFFFFF !important;            /* Texto branco ao digitar */
         -webkit-text-fill-color: #FFFFFF !important;
-        border: 1px solid #4b4d52 !important; /* Borda fina e discreta */
-        border-radius: 25px !important;       /* Formato arredondado 'clean' */
-        padding: 12px 20px !important;        /* Mais espaço para o texto respirar */
-        font-size: 1rem !important;
-        line-height: 1.4 !important;
-    }
-
-    /* Muda a cor da borda suavemente quando você clica para digitar */
-    div[data-testid="stChatInput"] textarea:focus {
-        border: 1px solid #FFD700 !important; 
-        box-shadow: 0 0 10px rgba(255, 215, 0, 0.1) !important;
+        
+        /* O CURSOR QUE PISCA */
+        caret-color: #FFFFFF !important; 
+        
+        /* BORDA E FORMATO */
+        border: 1px solid #30363d !important;
+        border-radius: 20px !important;
+        padding: 12px 20px !important;
+        
+        /* MATA O VERMELHO E O AMARELO DO FOCO */
+        box-shadow: none !important;
         outline: none !important;
     }
 
-    /* Estiliza o botão de enviar (a setinha) */
+    /* Brilho azulado/branco bem discreto quando você clica */
+    div[data-testid="stChatInput"] textarea:focus {
+        border: 1px solid #ffffff !important;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.2) !important;
+    }
+
+    /* Ajuste da setinha de enviar */
     button[data-testid="stChatInputSubmit"] {
+        color: #FFFFFF !important;
         background-color: transparent !important;
-        color: #FFD700 !important;
-        right: 10px !important;
-	}
+    }
     </style>
     """, unsafe_allow_html=True) #
 
