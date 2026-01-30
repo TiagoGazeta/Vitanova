@@ -12,73 +12,6 @@ st.markdown("""
 
 # --- BASE DE CONHECIMENTO (Cole aqui o texto dos seus 5 arquivos) ---
 CONHECIMENTO_VITANOVA = """
-Aja como o Coordenador Central da Ordem dos Investigadores de Vitanova. Com base nas fontes fornecidas sobre a Missão atual, crie um material pedagógico de alto impacto para os alunos do 5º ano.
-DIRETRIZES OBRIGATÓRIAS:
-1.	Público-Alvo: Linguagem clara, instigante e misteriosa para crianças de 10 anos.
-2.	Regra de Ouro (Sem Spoilers): Explique os desafios, as ferramentas e o dia a dia, mas jamais revele a conclusão da missão ou o parecer final. Os alunos devem sentir que são eles que descobrirão a 'lição' ao final da jornada.
-3.	Engajamento: Reforce que o destino de Vitanova e o retorno de Lara, Mateus, Sofia e Tomás dependem do esforço coletivo da turma.
-ROTEIRO PARA VÍDEO EXPLICATIVO 
-•	Abertura: Um alerta urgente de um dos personagens sobre o novo 'glitch' ou problema detectado em Vitanova.
-•	O Mistério: Descreva a nuance da semana (o que está estranho na cidade?).
-•	O Plano de Ação: Detalhe o passo a passo da semana (Dia 1 ao Dia 5), tratando cada dia como uma etapa de treinamento e investigação.
-•	Convocação: Termine com uma frase de incentivo épica sobre a responsabilidade dos investigadores do 5º ano.
-
-
-
-
-
-
-
-
-
-
-
-
-
-Aja como o Coordenador Central da Ordem dos Investigadores de Vitanova. Com base nas fontes fornecidas sobre a Missão atual, crie um material pedagógico de alto impacto para os alunos do 5º ano.
-DIRETRIZES OBRIGATÓRIAS:
-1.	Público-Alvo: Linguagem clara, instigante e misteriosa para crianças de 10 anos.
-2.	Regra de Ouro (Sem Spoilers): Explique os desafios, as ferramentas e o dia a dia, mas jamais revele a conclusão da missão ou o parecer final. Os alunos devem sentir que são eles que descobrirão a 'lição' ao final da jornada.
-3.	Engajamento: Reforce que o destino de Vitanova e o retorno de Lara, Mateus, Sofia e Tomás dependem do esforço coletivo da turma.
-ESTRUTURA DE APRESENTAÇÃO (10 SLIDES)
-•	Slide 1: Capa da Missão. Título da missão e imagem mental do desafio.
-•	Slide 2: Mensagem de Vitanova. O pedido de ajuda direto dos quatro personagens.
-•	Slide 3: O Problema Central. Explique o que a cidade está perdendo nesta semana.
-•	Slide 4: Ferramenta de História. Detalhe a habilidade da BNCC e como ela será usada para investigar o passado.
-•	Slide 5: Ferramenta de Geografia. Detalhe a habilidade da BNCC e como ela ajuda a entender o espaço da missão.
-•	Slide 6: Ferramenta de Matemática. Explique a lógica matemática ou o gráfico/tabela que servirá de prova técnica.
-•	Slide 7: O Dossiê de Campo. Instruções detalhadas sobre como preencher o relatório da semana.
-•	Slide 8: Investigação do Dia a Dia. Um resumo visual do que será feito de segunda a quinta.
-•	Slide 9: Alerta de Perigo. O que acontece se a turma não conseguir restaurar essa parte da cidade? (Incentivo ao esforço).
-•	Slide 10: Selo da Ordem. O encerramento com o próximo passo e o clima de mistério mantido."
-
-
-
-
-
-
-
-Aja como o Coordenador Central da Ordem dos Investigadores de Vitanova. Com base nas fontes fornecidas sobre a Missão atual, crie um material pedagógico de alto impacto para os alunos do 5º ano.
-DIRETRIZES OBRIGATÓRIAS:
-1.	Público-Alvo: Linguagem clara, instigante e misteriosa para crianças de 10 anos.
-2.	Regra de Ouro (Sem Spoilers): Explique os desafios, as ferramentas e o dia a dia, mas jamais revele a conclusão da missão ou o parecer final. Os alunos devem sentir que são eles que descobrirão a 'lição' ao final da jornada.
-3.	Engajamento: Reforce que o destino de Vitanova e o retorno de Lara, Mateus, Sofia e Tomás dependem do esforço coletivo da turma.
-ROTEIRO PARA VÍDEO EXPLICATIVO 
-•	Abertura: Um alerta urgente de um dos personagens sobre o novo 'glitch' ou problema detectado em Vitanova.
-•	O Mistério: Descreva a nuance da semana (o que está estranho na cidade?).
-•	O Plano de Ação: Detalhe o passo a passo da semana (Dia 1 ao Dia 5), tratando cada dia como uma etapa de treinamento e investigação.
-•	Convocação: Termine com uma frase de incentivo épica sobre a responsabilidade dos investigadores do 5º ano.
-Extremamente importante: jamais, em hipótese alguma, criar ou mostrar os avatares dos jovens gênios (personagens Lara, Mateus, Sofia e Tomás)
-
-
-
-
-
-
-
-
-
-
 🕵️♂️ GUIA DE HABILIDADES DO INVESTIGADOR (MISSÃO 1)
 Nesta primeira semana, para entender o que está acontecendo em Vitanova, vamos desenvolver as seguintes competências:
 📜 HISTÓRIA
@@ -4041,7 +3974,7 @@ else:
     st.error("Erro: API Key não encontrada nos Secrets do Streamlit.")
 
 model = genai.GenerativeModel(
-    model_name="gemini-1.5-flash",
+    model_name="gemini-3-flash-preview",
     system_instruction=INSTRUCOES_MESTRE
 )
 
