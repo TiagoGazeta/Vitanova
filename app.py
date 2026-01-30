@@ -4043,7 +4043,7 @@ INSTRUCOES_MESTRE = f"""
 
 # 1. Configuração do Modelo (Ajustado para o nome oficial)
 model = genai.GenerativeModel(
-    model_name="gemini-flash-latest", 
+    model_name="gemini-2.5-flash-lite", 
     system_instruction=INSTRUCOES_MESTRE
 )
 
