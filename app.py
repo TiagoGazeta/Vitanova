@@ -208,7 +208,7 @@ INSTRUCOES_MESTRE = f"""
 
 # 1. Configuração do Modelo (Ajustado para o nome oficial)
 client = Groq(api_key=st.secrets["GROQ_API_KEY"])
-MODELO_GROQ = "llama-3.3-70b-versatile"
+MODELO_GROQ = "meta-llama/llama-4-scout-17b-16e-instruct"
 
 # --- CONFIGURAÇÃO DA API ---
 client = Groq(api_key=st.secrets["GROQ_API_KEY"])
