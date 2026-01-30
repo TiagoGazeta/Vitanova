@@ -39,39 +39,44 @@ st.markdown("""
         color: #FFFFFF !important;
     }
 
-/* --- BARRA DE DIGITAÇÃO ULTRA CLEAN --- */
+/* --- REMOVE O CONTORNO VERMELHO E ESTILIZA O INPUT --- */
+    
+    /* 1. Remove sombras e bordas coloridas do container externo */
     div[data-testid="stChatInput"] {
+        border: none !important;
+        box-shadow: none !important;
         background-color: transparent !important;
     }
 
+    /* 2. Estiliza a caixa de texto propriamente dita */
     div[data-testid="stChatInput"] textarea {
-        background-color: #1a1c23 !important; /* Fundo escuro elegante */
-        color: #FFFFFF !important;            /* Texto branco ao digitar */
+        background-color: #1a1c23 !important;
+        color: #FFFFFF !important;
         -webkit-text-fill-color: #FFFFFF !important;
         
-        /* O CURSOR QUE PISCA */
+        /* FAZ O CURSOR PISCAR EM BRANCO */
         caret-color: #FFFFFF !important; 
         
-        /* BORDA E FORMATO */
         border: 1px solid #30363d !important;
         border-radius: 20px !important;
         padding: 12px 20px !important;
-        
-        /* MATA O VERMELHO E O AMARELO DO FOCO */
+
+        /* MATA O VERMELHO NO CLIQUE */
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    /* 3. Define um brilho branco sutil ao clicar (substituindo o vermelho) */
+    div[data-testid="stChatInput"] textarea:focus {
+        outline: none !important;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1) !important;
+        border: 1px solid #4b4d52 !important;
+    }
+
+    /* Garante que o botão de enviar não tenha contornos estranhos */
+    button[data-testid="stChatInputSubmit"] {
         box-shadow: none !important;
         outline: none !important;
-    }
-
-    /* Brilho azulado/branco bem discreto quando você clica */
-    div[data-testid="stChatInput"] textarea:focus {
-        border: 1px solid #ffffff !important;
-        box-shadow: 0 0 8px rgba(255, 255, 255, 0.2) !important;
-    }
-
-    /* Ajuste da setinha de enviar */
-    button[data-testid="stChatInputSubmit"] {
-        color: #FFFFFF !important;
-        background-color: transparent !important;
     }
     </style>
     """, unsafe_allow_html=True) #
