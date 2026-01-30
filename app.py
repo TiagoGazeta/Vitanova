@@ -27,7 +27,7 @@ st.markdown("""
         text-transform: uppercase;
         letter-spacing: 2px;
         border-bottom: 2px solid #000000;
-        padding-bottom: 10px;
+        padding-bottom: 5px;
     }
 
     /* 4. BALÕES DE MENSAGEM (ESTILO DOSSIÊ) */
