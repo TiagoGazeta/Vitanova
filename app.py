@@ -4042,8 +4042,8 @@ INSTRUCOES_MESTRE = f"""
 # --- FINAL DO ARQUIVO ---
 
 # 1. Configuração do Modelo (Ajustado para o nome oficial)
-model = genai.GenerativeModel(
-    model_name="llama-3.3-70b-versatile", 
+client = Groq(api_key=st.secrets["GROQ_API_KEY"])
+MODELO_GROQ = "llama-3.3-70b-versatile" 
     system_instruction=INSTRUCOES_MESTRE
 )
 
