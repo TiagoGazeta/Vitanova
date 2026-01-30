@@ -3967,24 +3967,35 @@ INSTRUCOES_MESTRE = f"""
 4. DIRETRIZES: Use vocabulário técnico (Dossiê, Glitch, Névoa). Se insistirem na resposta, diga: "O código de Vitanova só aceita soluções descobertas pela mente humana, não geradas por sistemas".
 """
 
-# Configuração do Gemini
-if "GOOGLE_API_KEY" in st.secrets:
-    genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
-else:
-    st.error("Erro: API Key não encontrada nos Secrets do Streamlit.")
+# --- FINAL DO ARQUIVO ---
 
+# 1. Configuração do Modelo (Ajustado para o nome oficial)
 model = genai.GenerativeModel(
-    model_name="gemini-3-flash-preview",
+    model_name="gemini-3-flash-preview", 
     system_instruction=INSTRUCOES_MESTRE
 )
 
+# 2. Título do App
+st.title("🕵️‍♂️ Terminal da Ordem: Vitanova")
+st.caption("Conexão Criptografada | Setor 5ºD")
+
+# 3. Inicialização da Memória (O que estava dando erro)
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
+# 4. Mostrar o histórico de mensagens
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+
+# 5. Entrada de texto e resposta da IA
 if prompt := st.chat_input("Relate sua descoberta ou dúvida..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
-        # Ajuste técnico: O Google exige 'model' em vez de 'assistant' no histórico
+        # Tradução de roles para o Google
         history_google = []
         for m in st.session_state.messages[:-1]:
             role_google = "model" if m["role"] == "assistant" else "user"
@@ -3993,10 +4004,8 @@ if prompt := st.chat_input("Relate sua descoberta ou dúvida..."):
         chat = model.start_chat(history=history_google)
         
         try:
-            # Envia a mensagem e exibe a resposta
             response = chat.send_message(prompt)
             st.markdown(response.text)
             st.session_state.messages.append({"role": "assistant", "content": response.text})
         except Exception as e:
-            st.error(f"Erro na conexão com Vitanova: {str(e)}")
-            st.info("Dica: Verifique se o nome do modelo no código é o mesmo do AI Studio.")
+            st.error(f"Erro na comunicação: {e}")
