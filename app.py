@@ -3974,7 +3974,7 @@ else:
     st.error("Erro: API Key não encontrada nos Secrets do Streamlit.")
 
 model = genai.GenerativeModel(
-    model_name="gemini-3-flash-preview",
+    model_name="gemini-1.5-flash",
     system_instruction=INSTRUCOES_MESTRE
 )
 
@@ -3994,10 +3994,20 @@ if prompt := st.chat_input("Relate sua descoberta ou dúvida..."):
     with st.chat_message("user"):
         st.markdown(prompt)
 
+   # Resposta da IA
     with st.chat_message("assistant"):
-        chat = model.start_chat(history=[
-            {"role": m["role"], "parts": [m["content"]]} for m in st.session_state.messages[:-1]
-        ])
-        response = chat.send_message(prompt)
-        st.markdown(response.text)
-        st.session_state.messages.append({"role": "assistant", "content": response.text})
+        # Traduzindo o histórico para o formato que o Google entende
+        history_google = []
+        for m in st.session_state.messages[:-1]:
+            # Se for assistente, vira 'model'. Se não, continua 'user'.
+            role_google = "model" if m["role"] == "assistant" else "user"
+            history_google.append({"role": role_google, "parts": [m["content"]]})
+        
+        chat = model.start_chat(history=history_google)
+        
+        try:
+            response = chat.send_message(prompt)
+            st.markdown(response.text)
+            st.session_state.messages.append({"role": "assistant", "content": response.text})
+        except Exception as e:
+            st.error(f"Erro na comunicação: {e}")
