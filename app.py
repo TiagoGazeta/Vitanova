@@ -4,44 +4,45 @@ import google.generativeai as genai
 # Configuração Visual
 st.set_page_config(page_title="Ordem dos Investigadores: Vitanova", page_icon="🕵️‍♂️")
 
-# --- ESTILO VISUAL DA ORDEM ---
+# --- ESTILO VISUAL DE ALTO CONTRASTE ---
 st.markdown("""
     <style>
-    /* Importa uma fonte mais moderna e legível */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&display=swap');
 
+    /* Fundo bem escuro para o texto brilhar */
     .stApp {
-        background-color: #0e1117;
-        color: #f0f2f6;
-        font-family: 'Inter', sans-serif;
+        background-color: #05070a;
+        font-family: 'Lexend', sans-serif;
     }
 
-    /* Aumenta o tamanho da letra das mensagens */
-    .stMarkdown p {
-        font-size: 1.15rem !important;
-        line-height: 1.6 !important;
-        margin-bottom: 1rem;
+    /* COR DA LETRA: Branco Puro e com mais "corpo" */
+    .stMarkdown p, .stMarkdown li {
+        color: #FFFFFF !important; 
+        font-size: 1.25rem !important; /* Letra maior para o 5ºD */
+        font-weight: 500 !important;   /* Letra levemente mais grossa */
+        line-height: 1.7 !important;   /* Mais espaço entre linhas */
+        letter-spacing: 0.02rem;       /* Espaçamento entre letras */
     }
 
-    /* Estiliza os títulos para dar um ar de "Dossiê Profissional" */
-    h1 {
-        color: #FFD700 !important; /* Dourado da Ordem */
-        font-size: 2.5rem !important;
+    /* Títulos em Amarelo Vibrante (mais visível que o dourado) */
+    h1, h2, h3 {
+        color: #FFEB3B !important; 
         font-weight: 700 !important;
-        text-shadow: 2px 2px 4px #000000;
+        text-transform: uppercase;
+        letter-spacing: 0.1rem;
     }
 
-    /* Melhora a visibilidade do campo de digitação */
-    .stChatInput textarea {
-        font-size: 1.1rem !important;
-    }
-    
-    /* Deixa o texto do assistente com um fundo levemente diferente para destacar */
+    /* Estilização das caixas de mensagem para não ficarem apagadas */
     [data-testid="stChatMessage"] {
-        border-radius: 15px;
-        padding: 15px;
-        margin-bottom: 10px;
-        border: 1px solid #30363d;
+        background-color: #1a1c23 !important; /* Cinza escuro sólido */
+        border: 2px solid #30363d !important;
+        box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+    }
+
+    /* Ajuste no campo de digitação */
+    .stChatInput textarea {
+        color: #FFFFFF !important;
+        font-size: 1.2rem !important;
     }
     </style>
     """, unsafe_allow_html=True)
