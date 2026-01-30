@@ -68,7 +68,9 @@ st.markdown("""
         background-color: transparent !important;
         color: #FFD700 !important;
         right: 10px !important;
-    }
+	}
+    </style>
+    """, unsafe_allow_html=True) #
 
 # --- 2. BASE DE CONHECIMENTO ---
 # IMPORTANTE: As três aspas abaixo abrem o texto. Não as apague!
