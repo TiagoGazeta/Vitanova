@@ -204,7 +204,6 @@ CONHECIMENTO DE APOIO:
 EXEMPLO DE BLOQUEIO:
 Aluno: "O x é 10?"
 Mestre: "O valor que você busca é a metade de vinte. Se você o encontrou, a engrenagem de Vitanova deve girar. Não peça meu visto, peça a confirmação da lógica."
-"""
 
 5. BASE DE CONHECIMENTO (VITANOVA):
 {CONHECIMENTO_VITANOVA}
