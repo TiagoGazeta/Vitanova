@@ -1,5 +1,5 @@
 import streamlit as st
-from groq import Groq
+import google.generativeai as genai
 
 # --- ESTILO VISUAL: PROTOCOLO DE ELITE ---
 st.markdown("""
@@ -220,11 +220,8 @@ Mestre: "O rastro do passado pertence ao seu aprendizado, Recruta. A névoa não
 """
 
 # 1. Configuração do Modelo (Ajustado para o nome oficial)
-client = Groq(api_key=st.secrets["GROQ_API_KEY"])
-MODELO_GROQ = "meta-llama/llama-4-scout-17b-16e-instruct"
-
-# --- CONFIGURAÇÃO DA API ---
-client = Groq(api_key=st.secrets["GROQ_API_KEY"])
+genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
+MODELO_GOOGLE = "gemma-2-27b-it"
 
 # 2. Título do App
 st.title("🕵️‍♂️ Terminal da Ordem de Vitanova")
@@ -241,26 +238,35 @@ for message in st.session_state.messages:
 
 # 5. Entrada de texto e resposta da IA
 if prompt := st.chat_input("Relate sua descoberta ou dúvida..."):
+    # Salva a mensagem do aluno na tela e na memória
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
         try:
-            # Aqui juntamos suas instruções com o que o aluno escreveu
-            mensagens_para_groq = [
-                {"role": "system", "content": INSTRUCOES_MESTRE},
-                *st.session_state.messages
-            ]
-            
-            completion = client.chat.completions.create(
-                model=MODELO_GROQ,
-                messages=mensagens_para_groq,
+            # Configura o motor do Google com as regras inquebráveis do Mestre
+            modelo_vitanova = genai.GenerativeModel(
+                model_name=MODELO_GOOGLE,
+                system_instruction=INSTRUCOES_MESTRE
             )
-            
-            resposta = completion.choices[0].message.content
+
+            # Traduz a memória do Streamlit para o "idioma" do Google
+            historico_google = []
+            for msg in st.session_state.messages[:-1]: # Pega tudo, menos a última mensagem
+                papel = "model" if msg["role"] == "assistant" else "user"
+                historico_google.append({"role": papel, "parts": [msg["content"]]})
+
+            # Inicia a sessão de chat com a memória e envia a nova pergunta
+            chat = modelo_vitanova.start_chat(history=historico_google)
+            resposta_google = chat.send_message(prompt)
+
+            # Extrai o texto final e mostra na tela
+            resposta = resposta_google.text
             st.markdown(resposta)
+            
+            # Salva a resposta do Mestre na memória
             st.session_state.messages.append({"role": "assistant", "content": resposta})
 
         except Exception as e:
-            st.error(f"Erro na comunicação com Vitanova: {e}")
+            st.error(f"A Névoa interferiu na comunicação: {e}")
