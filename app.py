@@ -221,7 +221,7 @@ Mestre: "O rastro do passado pertence ao seu aprendizado, Recruta. A névoa não
 
 # 1. Configuração do Modelo (Ajustado para o nome oficial)
 genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
-MODELO_GOOGLE = "gemma-3-27b-it"
+MODELO_GOOGLE = "gemini-3.1-flash-lite-preview"
 
 # 2. Título do App
 st.title("🕵️‍♂️ Terminal da Ordem de Vitanova")
