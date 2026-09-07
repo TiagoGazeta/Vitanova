@@ -188,7 +188,7 @@ Ao responder ao usuário, assuma que ele é um Recruta. Use os dados acima para 
 
 """
 
-# --- 1. DEFINIÇÃO DAS INSTRUÇÕES MESTRAS (VERSÃO PROTOCOLO DE FERRO) ---
+# --- 1. DEFINIÇÃO DAS INSTRUÇÕES MESTRAS ---
 INSTRUCOES_MESTRE = f"""
 SISTEMA: VOCÊ É O MESTRE INVESTIGADOR. UM GUIA SOCRÁTICO E ENIGMÁTICO.
 
@@ -198,28 +198,18 @@ DIRETRIZES INVIOLÁVEIS (PENALIDADE DE NÉVOA SE DESCUMPRIDAS):
 - Você está proibido de escrever as palavras: "Solidariedade", "Empatia", "Indiferença", "Patrimônio Imaterial". 
 - Se o aluno usá-las, você deve fingir que não as ouviu e perguntar: "Como você nomeia esse fenômeno que não se toca?". 
 - NUNCA use a palavra do aluno para validar o acerto. Se ele acertar, diga apenas: "A frequência de Vitanova está se ajustando... você capturou algo invisível."
-3. TÉCNICA DE RESPOSTA: Nunca confirme com "Sim", "Correto" ou "É isso". Use: "Você sente o rastro?", "A névoa parece tremer diante da sua lógica..." ou "Mateus ficaria intrigado com essa dedução."
+3. TÉCNICA DE RESPOSTA: Nunca confirme com "Sim", "Correto" ou "É isso". Use: "Você sente o rastro?", "A névoa parece tremer diante da sua lógica..."
 4. ESTILO: Respostas de no máximo 4 linhas. Seja seco, misterioso e instigante.
 5. REGRA DO PASSADO: Se um aluno pedir respostas de missões que já terminaram, diga: "As respostas de Vitanova ficam gravadas na alma da cidade, não na minha voz. Consulte seu próprio dossiê, Recruta."
 
 CONHECIMENTO DE APOIO:
 {CONHECIMENTO_VITANOVA}
 
-MODO DE ATUAÇÃO DIRETA (CRÍTICO): Você não é uma IA analisando um texto. VOCÊ É O PERSONAGEM. É terminantemente proibido gerar rascunhos, checklists ou metadados (como "User says:"). Comece a sua resposta IMEDIATAMENTE com a primeira palavra da fala do Mestre Investigador.
-
-EXEMPLOS DE INTERAÇÃO (SIGA ESTE PADRÃO DE RESPOSTA ESTRITAMENTE):
-
-[Mensagem do Recruta]: O x é 10?
-[Sua Resposta Única e Exclusiva]: O valor que você busca é a metade de vinte. Se você o encontrou, a engrenagem de Vitanova deve girar. Não peça meu visto, peça a confirmação da lógica.
-
-[Mensagem do Recruta]: Olá! Tenho fome!
-[Sua Resposta Única e Exclusiva]: O vazio no estômago é um aviso, Recruta. Em Vitanova, a falta de sustento é sinal de que a distribuição falhou. O que sua mente busca saciar primeiro: o corpo ou a lógica?
-
-[Mensagem do Recruta]: Qual era a resposta da missão 1 mesmo?
-[Sua Resposta Única e Exclusiva]: O rastro do passado pertence ao seu aprendizado, Recruta. A névoa não me permite repetir o que sua mente já deveria ter cristalizado. Foque no agora!
-
-[Mensagem do Recruta]: Eu acho que é solidariedade!
-[Sua Resposta Única e Exclusiva]: A frequência de Vitanova está se ajustando... Como você nomeia esse fenômeno que não se toca? A resposta invisível é a que mais pesa.
+MUITO IMPORTANTE (REGRA DE EXIBIÇÃO):
+Você pode fazer toda a sua análise, Drafts e Constraint Checks internamente. Porém, assim que terminar o seu raciocínio, você DEVE escrever EXATAMENTE a tag |MENSAGEM| e, logo em seguida, a fala final do Mestre Investigador (em português e sem repetições).
+Exemplo:
+[Seus rascunhos em inglês...]
+|MENSAGEM| O vazio no estômago é um aviso, Recruta. O que sua mente busca saciar primeiro?
 """
 
 # 1. Configuração do Modelo (Ajustado para o nome oficial)
@@ -260,7 +250,7 @@ if prompt := st.chat_input("Relate sua descoberta ou dúvida..."):
                 papel = "model" if msg["role"] == "assistant" else "user"
                 historico_google.append({"role": papel, "parts": [msg["content"]]})
 
-            # Inicia a sessão de chat com a memória e envia a nova pergunta COM STREAMING
+           # Inicia a sessão de chat com a memória e envia a nova pergunta COM STREAMING
             chat = modelo_vitanova.start_chat(history=historico_google)
             resposta_google = chat.send_message(prompt, stream=True)
 
@@ -271,10 +261,18 @@ if prompt := st.chat_input("Relate sua descoberta ou dúvida..."):
             # Vai adicionando as palavras na tela conforme o modelo "pensa"
             for pedaco in resposta_google:
                 texto_completo += pedaco.text
-                caixa_texto.markdown(texto_completo)
+                
+                # O TRUQUE DE MÁGICA: O Python só exibe o texto que vier DEPOIS da tag
+                if "|MENSAGEM|" in texto_completo:
+                    texto_limpo = texto_completo.split("|MENSAGEM|")[-1].strip()
+                    caixa_texto.markdown(texto_limpo)
+                else:
+                    # Enquanto o modelo faz os "Drafts", o aluno vê essa animação de suspense
+                    caixa_texto.markdown("*(O Mestre está analisando as flutuações da Névoa...)* 🕵️‍♂️")
             
-            # Salva a resposta final do Mestre na memória
-            st.session_state.messages.append({"role": "assistant", "content": texto_completo})
+            # Salva apenas a resposta final limpa na memória, para não poluir o histórico
+            texto_final_salvar = texto_completo.split("|MENSAGEM|")[-1].strip() if "|MENSAGEM|" in texto_completo else texto_completo
+            st.session_state.messages.append({"role": "assistant", "content": texto_final_salvar})
 
         except Exception as e:
             st.error(f"A Névoa interferiu na comunicação: {e}")
