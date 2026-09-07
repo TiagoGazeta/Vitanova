@@ -61,11 +61,11 @@ st.markdown("""
         box-shadow: none !important;
     }
 
-    /* 4. A LETRA: Força Branco Puro e faz o Cursor aparecer */
+    /* 4. A LETRA: Força Branco Puro e corrige o cinza escuro */
     div[data-testid="stChatInput"] textarea {
         color: #FFFFFF !important;              /* Letra Branca */
-        -webkit-text-fill-color: #000000 !important; /* Garante o Preto no Chrome */
-        caret-color: #000000 !important;        /* CURSOR PISCANDO EM BRANCO */
+        -webkit-text-fill-color: #FFFFFF !important; /* Força o preenchimento branco no Chrome */
+        caret-color: #FFFFFF !important;        /* Cursor piscando em branco */
         background-color: transparent !important;
         border: none !important;
         box-shadow: none !important;
