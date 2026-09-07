@@ -257,16 +257,18 @@ if prompt := st.chat_input("Relate sua descoberta ou dúvida..."):
                 papel = "model" if msg["role"] == "assistant" else "user"
                 historico_google.append({"role": papel, "parts": [msg["content"]]})
 
-            # Inicia a sessão de chat com a memória e envia a nova pergunta
+            # Inicia a sessão de chat com a memória e envia a nova pergunta COM STREAMING
             chat = modelo_vitanova.start_chat(history=historico_google)
-            resposta_google = chat.send_message(prompt)
+            resposta_google = chat.send_message(prompt, stream=True)
 
-            # Extrai o texto final e mostra na tela
-            resposta = resposta_google.text
-            st.markdown(resposta)
+            # Cria um espaço vazio na tela para o efeito máquina de escrever
+            caixa_texto = st.empty()
+            texto_completo = ""
+
+            # Vai adicionando as palavras na tela conforme o modelo "pensa"
+            for pedaco in resposta_google:
+                texto_completo += pedaco.text
+                caixa_texto.markdown(texto_completo)
             
-            # Salva a resposta do Mestre na memória
-            st.session_state.messages.append({"role": "assistant", "content": resposta})
-
-        except Exception as e:
-            st.error(f"A Névoa interferiu na comunicação: {e}")
+            # Salva a resposta final do Mestre na memória
+            st.session_state.messages.append({"role": "assistant", "content": texto_completo})
