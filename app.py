@@ -253,7 +253,7 @@ if prompt := st.chat_input("Relate sua descoberta ou dúvida..."):
 
             # Traduz a memória do Streamlit para o "idioma" do Google
             historico_google = []
-            for msg in st.session_state.messages[:-1]: # Pega tudo, menos a última mensagem
+            for msg in st.session_state.messages[:-1]: 
                 papel = "model" if msg["role"] == "assistant" else "user"
                 historico_google.append({"role": papel, "parts": [msg["content"]]})
 
@@ -272,3 +272,6 @@ if prompt := st.chat_input("Relate sua descoberta ou dúvida..."):
             
             # Salva a resposta final do Mestre na memória
             st.session_state.messages.append({"role": "assistant", "content": texto_completo})
+
+        except Exception as e:
+            st.error(f"A Névoa interferiu na comunicação: {e}")
